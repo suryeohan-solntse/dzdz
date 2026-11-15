@@ -5,4 +5,6 @@
   <Project Path="CyberCore.Browser/CyberCore.Browser.csproj" />
   <Project Path="CyberCore.Desktop/CyberCore.Desktop.csproj" />
   <Project Path="CyberCore/CyberCore.csproj" />
+  <Project Path="MyApp.ConsoleApp/MyApp.ConsoleApp.csproj" />
+  <Project Path="MyApp.Data/MyApp.Data.csproj" />
 </Solution>
