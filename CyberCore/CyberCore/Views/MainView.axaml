@@ -2,17 +2,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:CyberCore.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CyberCore.Views.MainView"
-             x:DataType="vm:MainViewModel">
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainViewModel />
-    </Design.DataContext>
+             xmlns:models="using:MyApp.Data.Models"
+             mc:Ignorable="d" d:DesignWidth="360" d:DesignHeight="640"
+             x:Class="CyberCore.Views.MainView">
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <TabControl Margin="4">
+        <TabItem Header="Занятия">
+            <ListBox x:Name="LessonsListBox" Margin="0,8,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:Lesson">
+                        <Border BorderBrush="#3B82F6" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,4">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{Binding StartTime, StringFormat='Дата: {0:dd.MM.yyyy HH:mm}'}" 
+                                           FontWeight="Bold" FontSize="15"/>
+                                <TextBlock Text="{Binding Student.FullName, StringFormat='Ученик: {0}'}" 
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Coach.FullName, StringFormat='Тренер: {0}'}" 
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Coach.Discipline, StringFormat='Дисциплина: {0}'}" 
+                                           Foreground="#6B7280"/>
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="{Binding DurationMinutes, StringFormat='{}{0} мин.'}"/>
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+
+        <TabItem Header="Ученики">
+            <ListBox x:Name="StudentsListBox" Margin="0,8,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:Student">
+                        <Border BorderBrush="#10B981" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,4">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{Binding FullName}" FontWeight="Bold" FontSize="15" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Nickname, StringFormat='Никнейм: {0}'}" Foreground="#10B981" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding CurrentMmr, StringFormat='Рейтинг MMR: {0}'}"/>
+                                <TextBlock Text="{Binding Phone, StringFormat='Тел: {0}'}" Foreground="#6B7280"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+
+        <TabItem Header="Тренеры">
+            <ListBox x:Name="CoachesListBox" Margin="0,8,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:Coach">
+                        <Border BorderBrush="#8B5CF6" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,4">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="{Binding FullName}" FontWeight="Bold" FontSize="15" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Discipline, StringFormat='Дисциплина: {0}'}" Foreground="#8B5CF6" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding HourlyRate, StringFormat='Ставка: {0} руб/час'}"/>
+                                <TextBlock Text="{Binding ExperienceYears, StringFormat='Опыт (лет): {0}'}" Foreground="#6B7280"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+    </TabControl>
 </UserControl>
