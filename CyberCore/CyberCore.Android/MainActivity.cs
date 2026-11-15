@@ -6,7 +6,7 @@ using Avalonia.Android;
 namespace CyberCore.Android;
 
 [Activity(
-    Label = "CyberCore.Android",
+    Label = "CyberCore Manager",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,
